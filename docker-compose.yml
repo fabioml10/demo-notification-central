@@ -1,0 +1,19 @@
+services:
+  notification_center:
+    build: ./notification_center
+    env_file:
+    - ./notification_center/.env 
+    ports:
+      - "4000:4000"
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - notification_center
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - notification_center
